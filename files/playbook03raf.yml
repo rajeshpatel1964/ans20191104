@@ -1,0 +1,36 @@
+---
+ - name: Helping out Raf with copy, unarchieve, cehcksum, run script
+   hosts: planetexpress
+
+
+   vars: 
+
+       goodcheck: 1c16b0284a964af50d7468cc9494d04be
+   tasks: 
+
+        ## COPY the tarzip to our targets hosts
+        -name: Copt to targets
+        copy: 
+               src: ~/ans/files/demoscript.tar.gz
+               dest: ~/
+
+               ## untar/unzip (ARCHIVE) our file on targets hosts
+               -name: untar and unzip our file
+               unarchive
+                      remote_src: yes
+                      srd: ~/demoscript.tar.gz
+                      dest: ~/
+
+
+              ## check CHECKSUN of script
+              - name: grab the md5 of our file
+                stat:
+                        checksum_algorithm: md5
+                        path: ~/demoscript.py
+
+                        register: raffact
+
+
+                        -name: print out to the screen what yhr heck is refact
+                        debug
+                           var: raffact.stat.checksum

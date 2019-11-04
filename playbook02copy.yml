@@ -1,0 +1,10 @@
+---
+- name: copy file from Controller to Remote Host
+  hosts: planetexpress
+
+  tasks:
+
+                - name: copy files to remote hosts
+                  copy:
+                        src: ~/ans/files/firewall.settings
+                        dest: ~/
